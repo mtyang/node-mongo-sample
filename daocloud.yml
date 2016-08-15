@@ -1,14 +1,19 @@
 image: daocloud/ci-node:0.8
 
-services:
-    - mongodb
-
-env:
-    - MONGODB_INSTANCE_NAME = "test"
-
-install:
-    - npm install -g mocha
-
-script:
-    - npm install
-    - mocha
+version: "2.0"
+test:
+  image: daocloud/ci-node:0.8
+  services:
+  - mongodb
+  env:
+  - MONGODB_INSTANCE_NAME = "test"
+  install:
+  - npm install -g mocha
+  script:
+  - npm install
+  - mocha
+build:
+  image:
+    dockerfile_path: /Dockerfile
+    build_dir: /
+    cache: true
